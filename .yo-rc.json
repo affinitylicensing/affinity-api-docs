@@ -1,0 +1,11 @@
+{
+  "generator-openapi-repo": {
+    "importExistingSpec": true,
+    "importedSpec": "/Users/Chris/dev/affinity/affinity-api-docs/spec/swagger.yml",
+    "name": "Affinity",
+    "repo": "affinitylicensing/affinity-api-docs",
+    "splitSpec": false,
+    "samples": false,
+    "installSwaggerUI": true
+  }
+}
