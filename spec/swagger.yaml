@@ -9,6 +9,7 @@ info:
   license:
     name: Proprietary
 
+host: api.affinitygateway.com
 # all paths will be relative to the basePath specified
 # basePath: /v1
 
