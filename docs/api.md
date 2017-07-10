@@ -4,7 +4,7 @@ The Affinity API is a paid service that exposes a
 [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)ful API to third-party customers to automate
 actions such as design uploads.
 
-JSON is returned by all API responses. All API requests must be made over HTTPS - HTTP requests will be ignored.
+JSON is returned by all API responses. All API requests must be made over HTTPS. HTTP requests will be ignored.
 
 ## Authentication
 
@@ -17,7 +17,7 @@ Affinity Gateway, under the API tab.
 
 ## Endpoint Documentation
 
-Endpoints are documented by the [Affinity API specification](https://github.com/affinitylicensing/public-api-spec).
+Endpoints are documented by the [Affinity API specification](http://apidocs.affinitygateway.com/).
 
 ## Webhooks
 
