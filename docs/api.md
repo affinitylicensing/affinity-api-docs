@@ -1,7 +1,7 @@
 # API Documentation
 
 The Affinity API is a paid service that exposes a
-[REST](https://en.wikipedia.org/wiki/Representational_state_transfer)ful API to third-party customers to automate
+[REST](https://en.wikipedia.org/wiki/Representational_state_transfer)ful API to vendors to automate
 actions such as design uploads.
 
 JSON is returned by all API responses. All API requests must be made over HTTPS. HTTP requests will be ignored.
