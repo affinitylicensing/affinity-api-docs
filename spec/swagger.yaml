@@ -30,6 +30,16 @@ paths:
         List existing product categories
       produces:
       - application/json
+      parameters:
+      - name: is_available
+        in: query
+        type: boolean
+        required: false
+        default: false
+        description: |
+          When set, only returns product categories which you have previously
+          added to a license application.
+          You should only upload designs within this subset.
       responses:
         200:
           description: list of product categories
