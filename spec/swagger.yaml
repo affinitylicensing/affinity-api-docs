@@ -350,6 +350,9 @@ definitions:
       title:
         type: string
         example: "My Design"
+      gateway_url:
+        type: string
+        example: "https://affinity-gateway.com/designs/1234"
       description:
         type: string
         example: "This design is on a shirt."
