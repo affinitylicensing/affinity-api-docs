@@ -19,6 +19,8 @@ Affinity Gateway, under the API tab.
 
 Endpoints are documented by the [Affinity API specification](http://apidocs.affinitygateway.com/).
 
+A list of "phases," or review states, for designs, are documented [here](design-phases.md).
+
 ## Webhooks
 
 [Webhook documentation is located here](webhooks.md).
