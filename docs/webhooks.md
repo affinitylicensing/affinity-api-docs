@@ -38,3 +38,21 @@ of your [account profile](https://affinity-gateway.local/profile/edit).
 | `design.reviewed` | A review action has completed on a product design. Includes the design object. |
 
 
+## Test Designs Webhook Requests
+
+Designs will not be reviewed in the test environment as they would be in production. You can, instead, submit
+designs and design iterations with specially-named titles that trigger automatic review in the test environment:
+
+| Title | Review State |
+| ---------- | ----------- |
+| testing:AdminApproved | Approved by Affinity |
+| testing:LicensorApproved | Approved By Licensor |
+| testing:Hold | On Hold |
+| testing:LicensorReview | Pending Licensor Review |
+| testing:LicensorRejected | Rejected By Licensor |
+| testing:AdminRejected | Rejected By Affinity |
+| testing:RejectedFinal | Rejected without Resubmissions |
+| testing:AdminApprovedWithChanges | Approved By Affinity With Changes |
+| testing:LicensorApprovedWithChanges | Approved By Licensor With Changes |
+
+A comprehensive list of design states with descriptions is available [here](design-phases.md). 
