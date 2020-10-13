@@ -31,6 +31,11 @@ You may optionally verify this signature to confirm that events are being sent f
 This signature is a SHA256 HMAC signature of the raw request body and the "Webhook Signature Key" listed in the API tab
 of your [account profile](https://affinity-gateway.local/profile/edit).
 
+## Triggering test webhook events
+
+When working with the test environment ("stage"), you can trigger automatic design review and webhook events by
+submitting the design with a special title. [See here for details](testing-design-phases.md).
+
 ## Event Types
 
 | Event name | Description |
