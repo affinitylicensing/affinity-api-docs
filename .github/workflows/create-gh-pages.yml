@@ -5,8 +5,7 @@ name: Create GH Pages
 
 on:
   push:
-    branches: ["!gh-pages"]
-  pull_request:
+    branches: ["add-gh-action"]
 
 jobs:
   deploy:
