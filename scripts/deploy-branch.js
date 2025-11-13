@@ -7,8 +7,6 @@ set('-e');
 set('-v');
 
 var branch = process.env.BRANCH_NAME && process.env.BRANCH_NAME.toLowerCase();
-console.log(branch);
-return;
 if (branch && branch !== 'gh-pages') {
 	var branchPath = path.join('.tmp', 'preview', branch, '/');
 	mkdir('-p', branchPath);
