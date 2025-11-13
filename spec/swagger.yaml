@@ -1,11 +1,11 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   description: External API for the Affinity Gateway
   version: 1.0.0
   title: Affinity Consultants API
   # put the contact info for your development or API team
   contact:
-    email: tech@affinity-consultants.com
+    email: tech@affinitylicensing.com
   license:
     name: Proprietary
 
@@ -15,36 +15,36 @@ host: api.affinitygateway.com
 
 # tags are used for organizing operations
 tags:
-- name: designs
-  description: Product design operations
+  - name: designs
+    description: Product design operations
 schemes:
-- https
+  - https
 paths:
   /product_categories:
     get:
       tags:
-      - designs
+        - designs
       summary: List product categories
       operationId: listCategories
       description: |
         List existing product categories
       produces:
-      - application/json
+        - application/json
       parameters:
-      - name: is_available
-        in: query
-        type: boolean
-        required: false
-        default: false
-        description: |
-          When set, only returns product categories which you have previously
-          added to a license application.
-          You should only upload designs within this subset.
+        - name: is_available
+          in: query
+          type: boolean
+          required: false
+          default: false
+          description: |
+            When set, only returns product categories which you have previously
+            added to a license application.
+            You should only upload designs within this subset.
       responses:
         200:
           description: list of product categories
           schema:
-            $ref: '#/definitions/CategoriesResponse'
+            $ref: "#/definitions/CategoriesResponse"
         401:
           description: not authenticated
         403:
@@ -52,18 +52,18 @@ paths:
   /clients:
     get:
       tags:
-      - designs
+        - designs
       summary: List licensed organizations
       operationId: listOrganizations
       description: |
         List existing licensed organizations
       produces:
-      - application/json
+        - application/json
       responses:
         200:
           description: list of organizations
           schema:
-            $ref: '#/definitions/OrganizationsResponse'
+            $ref: "#/definitions/OrganizationsResponse"
         401:
           description: not authenticated
         403:
@@ -71,47 +71,47 @@ paths:
   /designs:
     get:
       tags:
-      - designs
+        - designs
       summary: List product designs
       operationId: listDesigns
       description: |
         List existing designs
       produces:
-      - application/json
+        - application/json
       parameters:
-      - name: page_size
-        in: query
-        type: integer
-        required: false
-        description: Maximum number of results to return in response, 1<=n<=100
-      - name: page
-        in: query
-        type: integer
-        required: false
-        description: 1-based page number of result set
+        - name: page_size
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of results to return in response, 1<=n<=100
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: 1-based page number of result set
       responses:
         200:
           description: search results matching criteria
           schema:
-            $ref: '#/definitions/DesignsResponse'
+            $ref: "#/definitions/DesignsResponse"
         400:
           description: bad input parameter
     post:
       tags:
-      - designs
+        - designs
       summary: Upload a new design
       operationId: addDesign
       description: Adds a new design to the system
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - name: body
-        in: body
-        description: Request body for design submission
-        schema:
-          $ref: '#/definitions/CreateDesignRequest'
+        - name: body
+          in: body
+          description: Request body for design submission
+          schema:
+            $ref: "#/definitions/CreateDesignRequest"
       responses:
         201:
           description: item created
@@ -137,7 +137,7 @@ paths:
         200:
           description: Design with the given ID
           schema:
-            $ref: '#/definitions/Design'
+            $ref: "#/definitions/Design"
         401:
           description: Authentication required
         403:
@@ -194,12 +194,12 @@ paths:
           in: body
           description: Request body for design resubmission
           schema:
-            $ref: '#/definitions/ResubmitDesignRequest'
+            $ref: "#/definitions/ResubmitDesignRequest"
       responses:
         200:
           description: Design after resubmission
           schema:
-            $ref: '#/definitions/Design'
+            $ref: "#/definitions/Design"
         401:
           description: Authentication required
         403:
@@ -214,21 +214,21 @@ definitions:
       data:
         type: array
         items:
-          $ref: '#/definitions/ProductCategory'
+          $ref: "#/definitions/ProductCategory"
   OrganizationsResponse:
     type: object
     properties:
       data:
         type: array
         items:
-          $ref: '#/definitions/Organization'
+          $ref: "#/definitions/Organization"
   DesignsResponse:
     type: object
     properties:
       data:
         type: array
         items:
-          $ref: '#/definitions/Design'
+          $ref: "#/definitions/Design"
   Organization:
     type: object
     properties:
@@ -259,11 +259,12 @@ definitions:
     description: |
       Request body for design upload
     required:
-    - title
-    - product_category_id
-    - image
-    - image_filename
-    - primary_client_id
+      - title
+      - product_category_id
+      - image
+      - image_filename
+      - primary_client_id
+      - upi
     properties:
       title:
         type: string
@@ -276,7 +277,13 @@ definitions:
       product_category_id:
         type: integer
         format: int32
-        example: 156
+        example: 15
+        description: Required if missing product_categories
+      product_categories:
+        type: array
+        items:
+          type: integer
+        description: Used if a design has more than one product category. Required if missing product_category_id
       image:
         type: string
         format: byte
@@ -294,6 +301,32 @@ definitions:
         format: int32
         example: 1007
         description: Organization ID to which this design belongs
+      upi:
+        type: array
+        items:
+          type: string
+        description: At least one UPI is required. UPI must be unique to the design
+      customer:
+        type: string
+        description: Customer name
+      channel_direct:
+        type: boolean
+        description: Direct to Consumer distribution channel
+      channel_retailer:
+        type: boolean
+        description: Business to Business (Wholesale/Retail) distribution channel
+      channel_internal:
+        type: boolean
+        description: Internal consumption distribution channel
+      university_funds:
+        type: boolean
+        description: Required if channel_internal is true. University funds are being used for this order
+      not_for_resale:
+        type: boolean
+        description: Required if channel_internal is true. The product is not being resold
+      unit_estimation:
+        type: integer
+        description: Estimated number of units
       is_expedited:
         type: boolean
         example: true
@@ -359,30 +392,59 @@ definitions:
       internal_code:
         type: string
         example: "design_001"
+      customer:
+        type: string
+        example: "Customer Name"
+      unit_estimation:
+        type: integer
+        example: 25
+      channel_direct:
+        type: boolean
+        example: true
+      channel_retail:
+        type: boolean
+        example: true
+      channel_internal:
+        type: boolean
+        example: false
+      univerisity_funds:
+        type: boolean
+        example: false
+      not_for_resale:
+        type: boolean
+        example: false
       is_autotagged_client:
         type: boolean
         example: true
       phase:
-        $ref: '#/definitions/DesignPhase'
+        $ref: "#/definitions/DesignPhase"
+      upi:
+        type: array
+        items:
+          $ref: "#/definitions/DesignUPI"
       vendor:
-        $ref: '#/definitions/Vendor'
+        $ref: "#/definitions/Vendor"
         readOnly: true
       product_category:
-        $ref: '#/definitions/DesignProductCategory'
+        $ref: "#/definitions/DesignProductCategory"
+      product_categories:
+        type: array
+        items:
+          $ref: "#/definitions/DesignProductCategory"
       clients:
         type: array
         items:
-          $ref: '#/definitions/DesignClient'
+          $ref: "#/definitions/DesignClient"
       primary_client:
-        $ref: '#/definitions/DesignClient'
+        $ref: "#/definitions/DesignClient"
       secondary_clients:
         type: array
         items:
-          $ref: '#/definitions/DesignClient'
+          $ref: "#/definitions/DesignClient"
       iterations:
         type: array
         items:
-          $ref: '#/definitions/DesignIteration'
+          $ref: "#/definitions/DesignIteration"
       product_category_id:
         type: integer
         format: int32
@@ -390,7 +452,7 @@ definitions:
       eligible_phase_transitions:
         type: array
         items:
-          $ref: '#/definitions/DesignPhaseTransition'
+          $ref: "#/definitions/DesignPhaseTransition"
   DesignPhase:
     type: object
     properties:
@@ -489,9 +551,9 @@ definitions:
         format: date-time
         readOnly: true
       phase:
-        $ref: '#/definitions/DesignPhase'
+        $ref: "#/definitions/DesignPhase"
       image:
-        $ref: '#/definitions/DesignImage'
+        $ref: "#/definitions/DesignImage"
   DesignImage:
     type: object
     properties:
@@ -504,7 +566,17 @@ definitions:
         type: string
         example: "tribal pattern-alpha chi omega.jpg"
       urls:
-        $ref: '#/definitions/DesignImageUrls'
+        $ref: "#/definitions/DesignImageUrls"
+  DesignUPI:
+    type: object
+    properties:
+      upi:
+        type: string
+        example: "unique-design-upi"
+      design_id:
+        type: integer
+        format: int32
+        example: 12345
   DesignImageUrls:
     type: object
     properties:
