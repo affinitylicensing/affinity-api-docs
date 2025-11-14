@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: External API for the Affinity Gateway
   version: 1.0.0
-  title: Affinity Consultants API
+  title: Affinity Gateway API
   # put the contact info for your development or API team
   contact:
     email: tech@affinitylicensing.com

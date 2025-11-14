@@ -1,4 +1,4 @@
-# Affinity OpenAPI Specification
+# Affinity Gateway OpenAPI Specification
 [![Build Status](https://travis-ci.org/affinitylicensing/affinity-api-docs.svg?branch=master)](https://travis-ci.org/affinitylicensing/affinity-api-docs)
 
 
