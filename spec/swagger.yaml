@@ -430,7 +430,6 @@ definitions:
           $ref: "#/definitions/DesignUPI"
       vendor:
         $ref: "#/definitions/Vendor"
-        readOnly: true
       product_category:
         $ref: "#/definitions/DesignProductCategory"
       product_categories:
