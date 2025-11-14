@@ -33,7 +33,6 @@ jobs:
           cache: "npm"
       - name: Install Packages
         run: npm install
-        # working-directory: ${{ env.BUILD_PATH }}
       - name: Create Deploy Folder
         run: |
           mkdir web_deploy
@@ -49,3 +48,7 @@ jobs:
       - name: Replace swagger.json link
         run: sed -i 's/http:\/\/petstore.swagger.io\/v2\/swagger.json/..\/swagger.json/g' swagger-ui/index.html
         working-directory: ${{ env.BUILD_PATH }}
+      - name: Upload artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.BUILD_PATH }}
