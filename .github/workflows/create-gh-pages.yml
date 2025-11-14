@@ -7,19 +7,41 @@ on:
   push:
     branches: ["add-gh-action"]
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    env:
-      BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-      GH_TOKEN: ${{ github.token }}
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+env:
+  BUILD_PATH: "."
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Generate branch GH Page
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "22.x"
           cache: "npm"
-      - run: npm install
-      - run: npm run deploy-branch
+      - name: Install Packages
+        run: npm install
+        working-directory: ${{ env.BUILD_PATH }}
+      - name: Build Swagger
+        run: |
+          npm run swagger bundle --        -o swagger.json
+          npm run swagger bundle -- --yaml -o web_deploy/swagger.yaml
+        working-directory: ${{ env.BUILD_PATH }}
+      - name: Copy Index
+        run: cp web/index.html ./
+        working-directory: ${{ env.BUILD_PATH }}
+      - name: Replace swagger.json link
+        run: sed -i http://petstore.swagger.io/v2/swagger.json ../swagger.json swagger-ui/index.html
+        working-directory: ${{ env.BUILD_PATH }}
