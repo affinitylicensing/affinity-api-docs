@@ -276,7 +276,7 @@ definitions:
       customer: "string"
       unit_estimation: 15
       channel_direct: true
-      channel_retailer: false
+      channel_retail: false
       channel_internal: false
     properties:
       title:
@@ -324,7 +324,7 @@ definitions:
       channel_direct:
         type: boolean
         description: Direct to Consumer distribution channel
-      channel_retailer:
+      channel_retail:
         type: boolean
         description: Business to Business (Wholesale/Retail) distribution channel
       channel_internal:
