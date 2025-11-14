@@ -43,5 +43,6 @@ jobs:
         run: cp web/index.html ./
         working-directory: ${{ env.BUILD_PATH }}
       - name: Replace swagger.json link
-        run: sed -i 's/http:\/\/petstore.swagger.io\/v2\/swagger.json/..\/swagger.json/g' swagger-ui/index.html
+        # run: sed -i 's/http:\/\/petstore.swagger.io\/v2\/swagger.json/..\/swagger.json/g' swagger-ui/index.html
+        run: ls -al
         working-directory: ${{ env.BUILD_PATH }}
