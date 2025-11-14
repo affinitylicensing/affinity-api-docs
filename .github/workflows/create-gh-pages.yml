@@ -37,7 +37,7 @@ jobs:
       - name: Build Swagger
         run: |
           npm run swagger bundle --        -o swagger.json
-          npm run swagger bundle -- --yaml -o web_deploy/swagger.yaml
+          npm run swagger bundle -- --yaml -o swagger.yaml
         working-directory: ${{ env.BUILD_PATH }}
       - name: Copy Index
         run: cp web/index.html ./
