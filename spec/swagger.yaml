@@ -265,15 +265,24 @@ definitions:
       - image_filename
       - primary_client_id
       - upi
+    example:
+      title: "My Shirt"
+      # product_category_id: 15
+      product_categories: [15, 32]
+      image: "string"
+      image_filename: "designco_01.png"
+      description: "This is a v-neck t-shirt"
+      upi: ["unique-design-id"]
+      customer: "string"
+      unit_estimation: 15
+      channel_direct: true
+      channel_retail: false
+      channel_internal: false
     properties:
       title:
         type: string
         example: "My Shirt"
         description: Title of the design
-      internal_code:
-        type: string
-        example: "design_001"
-        description: Optional identifier used internally within your system
       product_category_id:
         type: integer
         format: int32
@@ -309,10 +318,13 @@ definitions:
       customer:
         type: string
         description: Customer name
+      unit_estimation:
+        type: integer
+        description: Estimated number of units
       channel_direct:
         type: boolean
         description: Direct to Consumer distribution channel
-      channel_retailer:
+      channel_retail:
         type: boolean
         description: Business to Business (Wholesale/Retail) distribution channel
       channel_internal:
@@ -324,9 +336,6 @@ definitions:
       not_for_resale:
         type: boolean
         description: Required if channel_internal is true. The product is not being resold
-      unit_estimation:
-        type: integer
-        description: Estimated number of units
       is_expedited:
         type: boolean
         example: true
@@ -389,9 +398,6 @@ definitions:
       description:
         type: string
         example: "This design is on a shirt."
-      internal_code:
-        type: string
-        example: "design_001"
       customer:
         type: string
         example: "Customer Name"
@@ -424,7 +430,6 @@ definitions:
           $ref: "#/definitions/DesignUPI"
       vendor:
         $ref: "#/definitions/Vendor"
-        readOnly: true
       product_category:
         $ref: "#/definitions/DesignProductCategory"
       product_categories:

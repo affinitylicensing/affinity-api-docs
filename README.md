@@ -1,5 +1,5 @@
 # Affinity Gateway OpenAPI Specification
-[![Build Status](https://travis-ci.org/affinitylicensing/affinity-api-docs.svg?branch=master)](https://travis-ci.org/affinitylicensing/affinity-api-docs)
+[![Pages Status](https://github.com/affinitylicensing/affinity-api-docs/actions/workflows/create-gh-pages.yml/badge.svg)](https://github.com/affinitylicensing/affinity-api-docs/actions/workflows/create-gh-pages.yml)
 
 
 
