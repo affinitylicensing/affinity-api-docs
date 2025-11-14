@@ -40,14 +40,10 @@ jobs:
         run: |
           npm run swagger bundle --        -o web_deploy/swagger.json
           npm run swagger bundle -- --yaml -o web_deploy/swagger.yaml
-        # working-directory: ${{ env.BUILD_PATH }}
       - name: Copy Index
         run: cp web/index.html ./web_deploy
       - name: Copy Swagger UI
-        run: cp -r node_modules/swagger-ui/dist/* ./web_deploy
-        # working-directory: ${{ env.BUILD_PATH }}
+        run: cp -r node_modules/swagger-ui/dist/* ./web_deploy/swagger-ui
       - name: Replace swagger.json link
-        run: ls -al
-
-        # run: sed -i 's/http:\/\/petstore.swagger.io\/v2\/swagger.json/..\/swagger.json/g' swagger-ui/index.html
+        run: sed -i 's/http:\/\/petstore.swagger.io\/v2\/swagger.json/..\/swagger.json/g' swagger-ui/index.html
         working-directory: ${{ env.BUILD_PATH }}
