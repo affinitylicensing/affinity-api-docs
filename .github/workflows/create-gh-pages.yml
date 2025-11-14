@@ -35,7 +35,9 @@ jobs:
         run: npm install
         # working-directory: ${{ env.BUILD_PATH }}
       - name: Create Deploy Folder
-        run: mkdir web_deploy
+        run: |
+          mkdir web_deploy
+          mkdir web_deploy/swagger-ui
       - name: Build Swagger
         run: |
           npm run swagger bundle --        -o web_deploy/swagger.json
