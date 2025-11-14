@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  BUILD_PATH: "."
+  BUILD_PATH: "./web_deploy"
 
 jobs:
   build:
@@ -33,16 +33,19 @@ jobs:
           cache: "npm"
       - name: Install Packages
         run: npm install
-        working-directory: ${{ env.BUILD_PATH }}
+        # working-directory: ${{ env.BUILD_PATH }}
+      - name: Create Deploy Folder
+        run: mkdir web_deploy
       - name: Build Swagger
         run: |
-          npm run swagger bundle --        -o swagger.json
-          npm run swagger bundle -- --yaml -o swagger.yaml
-        working-directory: ${{ env.BUILD_PATH }}
+          npm run swagger bundle --        -o web_deploy/swagger.json
+          npm run swagger bundle -- --yaml -o web_deploy/swagger.yaml
+        # working-directory: ${{ env.BUILD_PATH }}
       - name: Copy Index
-        run: cp web/index.html ./
-        working-directory: ${{ env.BUILD_PATH }}
+        run: cp web/index.html ./web_deploy
+      - name: Copy Swagger UI
+        run: cp -r node_modules/swagger-ui/dist/* ./web_deploy
+        # working-directory: ${{ env.BUILD_PATH }}
       - name: Replace swagger.json link
-        # run: sed -i 's/http:\/\/petstore.swagger.io\/v2\/swagger.json/..\/swagger.json/g' swagger-ui/index.html
-        run: ls -al
+        run: sed -i 's/http:\/\/petstore.swagger.io\/v2\/swagger.json/..\/swagger.json/g' swagger-ui/index.html
         working-directory: ${{ env.BUILD_PATH }}
